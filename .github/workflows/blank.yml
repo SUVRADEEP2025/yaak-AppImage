@@ -1,0 +1,15 @@
+name: Delete All Releases
+on:
+  workflow_dispatch: # Allows manual trigger
+
+jobs:
+  delete-releases:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Delete all releases
+        uses: dev-drprasad/delete-older-releases@v0.3.4
+        with:
+          keep_latest: 0
+          delete_tags: true # Optional: deletes associated tags as well
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
