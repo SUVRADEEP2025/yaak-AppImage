@@ -13,3 +13,10 @@ jobs:
           delete_tags: true # Optional: deletes associated tags as well
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      - name: Delete all tags and releases
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          gh api repos/{owner}/{repo}/tags --jq '.[].name' | xargs -I {} gh release delete {} --cleanup-tag -y
+ 
+
